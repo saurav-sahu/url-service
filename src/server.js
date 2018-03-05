@@ -1,5 +1,5 @@
 const hapi = require('hapi');
-const packageDetails = require('../package');
+const allRoutes = require('./routes');
 
 const server = new hapi.Server();
 server.connection({
@@ -7,17 +7,7 @@ server.connection({
   port: Number(process.env.PORT) || Number(process.argv[2]) || 8080,
 });
 
-server.route({
-  path: '/',
-  method: 'GET',
-  handler: (request, response) => {
-    response({
-      statusCode: 200,
-      message: packageDetails.description,
-      data: packageDetails.name,
-    });
-  },
-});
+server.route(allRoutes);
 
 if (!module.parent) {
   server.start()
