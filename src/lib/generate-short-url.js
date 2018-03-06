@@ -12,7 +12,7 @@ const generateShortUrl = (longUrl, hash, offset, length) => {
   return models.urls.newUrl(shortUrl, longUrl)
     .then(([url, created]) => {
       if (url.longUrl !== longUrl && !created) {
-        return generateShortUrl(longUrl, hash, offset + 1, 6);
+        return generateShortUrl(longUrl, hash, offset + 1, length);
       }
       return Promise.resolve({ longUrl: url.longUrl, shortUrl: url.shortUrl });
     });

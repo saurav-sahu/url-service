@@ -1,7 +1,7 @@
 const about = require('./about');
-const shorten = require('./urls');
+const urls = require('./urls');
 
 module.exports = [
   ...about,
-  ...shorten,
+  ...urls,
 ];

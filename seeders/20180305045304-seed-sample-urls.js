@@ -17,7 +17,6 @@ module.exports = {
         const shortUrlCode = urlHash.slice(offset, offset + shortUrlLength);
         if (sampleUrlObjects[shortUrlCode]) { offset += 1; } else {
           sampleUrlObjects[shortUrlCode] = ({
-            id: i,
             longUrl,
             shortUrl: shortUrlCode,
             createdAt: new Date(),
@@ -27,8 +26,7 @@ module.exports = {
         }
       }
     }
-    return queryInterface.bulkInsert('urls', Object.values(sampleUrlObjects))
-      .catch((e) => { console.log(e); throw e; });
+    return queryInterface.bulkInsert('urls', Object.values(sampleUrlObjects));
   },
 
   down: queryInterface => queryInterface.bulkDelete('urls'),

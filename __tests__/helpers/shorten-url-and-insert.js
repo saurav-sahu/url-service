@@ -13,8 +13,8 @@ describe('shortenUrlAndInsert', () => {
     const url1 = 'http://first.com';
     const url2 = 'http://second.com';
 
-    shortenUrlAndInsert(url1, lib.hasher(url1), 0, 6)
-      .then(() => shortenUrlAndInsert(url2, lib.hasher(url2), 0, 6))
+    shortenUrlAndInsert(url1)
+      .then(() => shortenUrlAndInsert(url2))
       .then(() => models.urls.findAll({
         where: { shortUrl: 'bcdefa' },
       }))

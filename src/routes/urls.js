@@ -1,7 +1,6 @@
 const joi = require('joi');
 
 const helpers = require('../helpers');
-const lib = require('../lib');
 
 module.exports = [
   {
@@ -16,18 +15,12 @@ module.exports = [
     },
     handler: (request, response) => {
       const { url } = request.payload;
-
-
-      helpers.shortenUrlAndInsert(
-        url,
-        lib.hasher(url),
-        0,
-        6,
-      )
+      helpers.shortenUrlAndInsert(url)
         .then(urlRow => response({
           data: urlRow,
           statusCode: 200,
-        }));
+        }))
+        .catch(response);
     },
   },
 ];
