@@ -1,15 +1,5 @@
-const packageDetails = require('../../package');
+const about = require('./about');
 
 module.exports = [
-  {
-    path: '/',
-    method: 'GET',
-    handler: (request, response) => {
-      response({
-        statusCode: 200,
-        message: packageDetails.description,
-        data: packageDetails.name,
-      });
-    },
-  },
+  ...about,
 ];

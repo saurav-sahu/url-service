@@ -17,7 +17,8 @@
     "md5": "^2.2.1",
     "nodemon": "^1.17.1",
     "pg": "^7.4.1",
-    "sequelize": "^4.32.2"
+    "sequelize": "^4.32.2",
+    "joi": "9"
   },
   "devDependencies": {
     "@types/jest": "^22.1.4",
