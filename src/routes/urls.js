@@ -6,7 +6,7 @@ const lib = require('../lib');
 module.exports = [
   {
     method: 'POST',
-    path: '/shorten',
+    path: '/urls',
     config: {
       validate: {
         payload: {

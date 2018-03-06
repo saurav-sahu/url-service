@@ -3,10 +3,10 @@ const supertest = require('supertest');
 const lib = require('../../src/lib');
 const server = require('../../src/server');
 
-describe('POST /shorten', () => {
+describe('POST /urls', () => {
   test('should return 200 statusCode', (done) => {
     supertest(server.listener)
-      .post('/shorten')
+      .post('/urls')
       .send({
         url: 'http://wikipedia.org',
       })
@@ -19,7 +19,7 @@ describe('POST /shorten', () => {
   test('should return longUrl and shortUrl in response body', (done) => {
     const url = 'http://wikipedia.org';
     supertest(server.listener)
-      .post('/shorten')
+      .post('/urls')
       .send({ url })
       .then((response) => {
         expect(response.body.data.longUrl).toBe(url);

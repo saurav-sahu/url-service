@@ -1,5 +1,5 @@
 const about = require('./about');
-const shorten = require('./shorten');
+const shorten = require('./urls');
 
 module.exports = [
   ...about,
