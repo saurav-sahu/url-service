@@ -1,5 +1,7 @@
 const hapi = require('hapi');
+
 const allRoutes = require('./routes');
+
 
 const server = new hapi.Server();
 server.connection({
