@@ -7,9 +7,14 @@ module.exports = (sequelize, DataTypes) => {
     shortUrl: {
       type: DataTypes.STRING(6),
       unique: true,
+      validate: {
+        len: [6, 6],
+      },
     },
-  }, {
-    timestamps: false,
+  });
+  urls.newUrl = (shortUrl, longUrl) => urls.findOrCreate({
+    where: { shortUrl },
+    defaults: { longUrl },
   });
   return urls;
 };
