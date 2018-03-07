@@ -2,7 +2,7 @@ const supertest = require('supertest');
 
 const lib = require('../../src/lib');
 const models = require('../../src/models');
-const server = require('../../src/server');
+const server = require('../../src');
 
 describe('POST /urls', () => {
   test('should return 200 statusCode', (done) => {

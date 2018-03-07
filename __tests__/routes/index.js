@@ -1,5 +1,5 @@
 const allRoutes = require('../../src/routes');
-const server = require('../../src/server');
+const server = require('../../src');
 
 describe('server', () => {
   test('should contain correct number of routes', () => {

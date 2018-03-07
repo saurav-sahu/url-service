@@ -1,10 +1,19 @@
+const catboxRedis = require('catbox-redis');
 const good = require('good');
 const hapi = require('hapi');
 
-const allRoutes = require('./routes');
+const server = new hapi.Server({
+  cache: [
+    {
+      name: 'redisCache',
+      engine: catboxRedis,
+      host: '127.0.0.1',
+      port: 6379,
+      partition: 'urls',
+    },
+  ],
+});
 
-
-const server = new hapi.Server();
 server.connection({
   host: '0.0.0.0',
   port: Number(process.env.PORT) || Number(process.argv[2]) || 8080,
@@ -31,15 +40,5 @@ server.register({
     throw err;
   }
 });
-
-server.route(allRoutes);
-
-if (!module.parent) {
-  server.start()
-    .then(() => {
-      console.log(`Server running at: ${server.info.uri}`);
-    })
-    .catch((error) => { throw error; });
-}
 
 module.exports = server;
