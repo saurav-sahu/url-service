@@ -1,6 +1,7 @@
 const supertest = require('supertest');
 
 const lib = require('../../src/lib');
+const models = require('../../src/models');
 const server = require('../../src/server');
 
 describe('POST /urls', () => {
@@ -26,5 +27,37 @@ describe('POST /urls', () => {
         expect(lib.hasher(url).includes(response.body.data.shortUrl)).toBe(true);
         done();
       });
+  });
+});
+
+describe('get /urls', () => {
+  test('should return statusCode 400 when code passed is invalid (not of length 6)', (done) => {
+    supertest(server.listener)
+      .get('/urls?code=123')
+      .then((response) => {
+        expect(response.body.statusCode).toBe(400);
+        done();
+      })
+      .catch((e) => { throw e; });
+  });
+
+  test('should return statusCode 404 when code does not exist in the database', (done) => {
+    supertest(server.listener)
+      .get('/urls?code=12345_')
+      .then((response) => {
+        expect(response.body.statusCode).toBe(404);
+        done();
+      });
+  });
+
+  test('should return correct url entry when code is present in the database', (done) => {
+    models.urls.findOne()
+      .then(urlRow => supertest(server.listener)
+        .get(`/urls?code=${urlRow.shortUrl}`)
+        .then((response) => {
+          expect(response.body.data.shortUrl).toBe(urlRow.shortUrl);
+          expect(response.body.data.longUrl).toBe(urlRow.longUrl);
+          done();
+        }));
   });
 });
