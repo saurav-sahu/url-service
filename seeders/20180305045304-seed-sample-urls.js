@@ -32,49 +32,12 @@ const urlObjectsGenerator = (offset, count) => {
 
 module.exports = {
   up: (queryInterface) => {
-    const count = Number(process.env.URL_COUNT) || 10000;
-    const iterations = 100;
-    const insertionPromises = [];
+    const count = Number(process.env.URL_COUNT) || 1000000;
 
-    for (let i = 0; i < iterations; i += 1) {
-      const urlObjects = urlObjectsGenerator(count * i, count);
-      insertionPromises.push(queryInterface.bulkInsert('urls', Object.values(urlObjects)));
-    }
-    return Promise.all(insertionPromises)
-      .then(server.start())
-      .then(() => {
-        const redisCache = server.cache(redisOptions);
-        const redisCacheInsertionPromises = [];
-
-        for (let i = 0; i < iterations; i += 1) {
-          const urlObjects = urlObjectsGenerator(count * i, count);
-          console.log('redis -> ', count * i, count, 'end ->', (count * i) + (count - 1));
-
-
-          redisCacheInsertionPromises.concat(Object.values(urlObjects).map(url =>
-            redisCache.set(url.shortUrl, url.longUrl)));
-        }
-
-        return Promise.all(redisCacheInsertionPromises);
-      })
+    const urlObjects = urlObjectsGenerator(0, count);
+    return queryInterface.bulkInsert('urls', Object.values(urlObjects))
       .catch((e) => { throw e; });
   },
 
-  down: queryInterface => queryInterface.bulkDelete('urls')
-    .then(() => server.start())
-    .then(() => {
-      const count = Number(process.env.URL_COUNT) || 10000;
-      const redisCache = server.cache(redisOptions);
-      const redisCacheDeletePromises = [];
-
-      for (let i = 0; i < count; i += 1) {
-        const urlObjects = urlObjectsGenerator(count * i, count);
-
-        redisCacheDeletePromises.concat(Object.values(urlObjects).map(url =>
-          redisCache.drop(url.shortUrl)));
-      }
-
-      return Promise.all(redisCacheDeletePromises);
-    })
-    .catch((e) => { throw e; }),
+  down: queryInterface => queryInterface.bulkDelete('urls').catch((e) => { throw e; }),
 };
