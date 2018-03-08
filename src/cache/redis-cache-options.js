@@ -7,9 +7,7 @@ const redisCacheOptions = {
   generateFunc: (shortUrl, next) => {
     models.urls.findOne({ where: { shortUrl } })
       .then((urlRow) => {
-        if (!urlRow) {
-          next(null);
-        } else {
+        if (urlRow) {
           next(null, urlRow.longUrl);
         }
       });
