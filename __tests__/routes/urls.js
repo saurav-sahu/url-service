@@ -31,30 +31,6 @@ describe('POST /urls', () => {
       })
       .catch((e) => { throw e; });
   });
-
-  test('should add url to cache', (done) => {
-    const url = 'http://localhost:8080';
-
-    server.start()
-      .then(() => supertest(server.listener)
-        .post('/urls')
-        .send({ url })
-        .then(response => models.urls.findOne({
-          where: {
-            shortUrl: response.body.data.shortUrl,
-          },
-        }))
-        .then((urlRow) => {
-          const redisCache = server.cache(redisCacheOptions);
-          redisCache.get(urlRow.shortUrl, (err, cachedUrl) => {
-            if (err) { throw err; }
-            expect(cachedUrl).not.toBeFalsy();
-            expect(cachedUrl).toBe(urlRow.longUrl);
-            done();
-          });
-        }))
-      .catch((e) => { throw e; });
-  });
 });
 
 describe('get /urls', () => {
