@@ -4,6 +4,8 @@ const lib = require('../../src/lib');
 const models = require('../../src/models');
 const server = require('../../src');
 
+const redisCacheOptions = require('../../src/cache/redis-cache-options');
+
 describe('POST /urls', () => {
   test('should return 200 statusCode', (done) => {
     supertest(server.listener)
@@ -53,16 +55,35 @@ describe('get /urls', () => {
       .catch((e) => { throw e; });
   });
 
-  test('should return correct url entry when code is present in the database', (done) => {
-    server.start()
-      .then(() => models.urls.findOne())
-      .then(urlRow => supertest(server.listener)
-        .get(`/urls?code=${urlRow.shortUrl}`)
-        .then((response) => {
-          expect(response.body.data.shortUrl).toBe(urlRow.shortUrl);
-          expect(response.body.data.longUrl).toBe(urlRow.longUrl);
-          done();
-        }))
-      .catch((e) => { throw e; });
+  describe('should return correct url entry', () => {
+    test('when code is present in the database', (done) => {
+      server.start()
+        .then(() => models.urls.findOne())
+        .then(urlRow => supertest(server.listener)
+          .get(`/urls?code=${urlRow.shortUrl}`)
+          .then((response) => {
+            expect(response.body.data.shortUrl).toBe(urlRow.shortUrl);
+            expect(response.body.data.longUrl).toBe(urlRow.longUrl);
+            done();
+          }))
+        .catch((e) => { throw e; });
+    });
+
+    test('should add url to cache', (done) => {
+      server.start()
+        .then(() => models.urls.findOne())
+        .then(urlRow => supertest(server.listener)
+          .get(`/urls?code=${urlRow.shortUrl}`)
+          .then(() => {
+            const redisCache = server.cache(redisCacheOptions);
+            redisCache.get(urlRow.shortUrl, (err, url) => {
+              if (err) { throw err; }
+              expect(url).not.toBeFalsy();
+              expect(url).toBe(urlRow.longUrl);
+              done();
+            });
+          }))
+        .catch((e) => { throw e; });
+    });
   });
 });

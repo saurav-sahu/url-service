@@ -10,6 +10,7 @@ const server = new hapi.Server({
       host: '127.0.0.1',
       port: 6379,
       partition: 'urls',
+      shared: true,
     },
   ],
 });
