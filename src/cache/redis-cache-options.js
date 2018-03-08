@@ -9,8 +9,9 @@ const redisCacheOptions = {
       .then((urlRow) => {
         if (!urlRow) {
           next(null);
+        } else {
+          next(null, urlRow.longUrl);
         }
-        next(null, urlRow.longUrl);
       });
   },
   generateTimeout: 1000,

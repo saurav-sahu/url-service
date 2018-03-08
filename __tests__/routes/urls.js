@@ -26,7 +26,8 @@ describe('POST /urls', () => {
         expect(response.body.data.longUrl).toBe(url);
         expect(lib.hasher(url).includes(response.body.data.shortUrl)).toBe(true);
         done();
-      });
+      })
+      .catch((e) => { throw e; });
   });
 });
 
@@ -48,7 +49,8 @@ describe('get /urls', () => {
         .then((response) => {
           expect(response.body.statusCode).toBe(404);
           done();
-        }));
+        }))
+      .catch((e) => { throw e; });
   });
 
   test('should return correct url entry when code is present in the database', (done) => {
@@ -60,6 +62,7 @@ describe('get /urls', () => {
           expect(response.body.data.shortUrl).toBe(urlRow.shortUrl);
           expect(response.body.data.longUrl).toBe(urlRow.longUrl);
           done();
-        }));
+        }))
+      .catch((e) => { throw e; });
   });
 });
