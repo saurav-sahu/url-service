@@ -2,18 +2,19 @@
   "name": "url-service",
   "version": "1.0.0",
   "description": "Url shortener service",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "repository": "git@github.com:saurav-sahu/url-service.git",
   "author": "Sahu, S <sauravsahu.12@live.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/index.js",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "test": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --forceExit --runInBand",
     "coverage": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --forceExit --runInBand --coverage"
   },
   "dependencies": {
     "bases": "^0.2.1",
+    "catbox-redis": "^3.0.2",
     "good": "7",
     "good-console": "6",
     "good-squeeze": "5",

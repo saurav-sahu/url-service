@@ -12,13 +12,16 @@
       "args": [
         "--runInBand"
       ],
+      "env": {
+        "NODE_ENV": "test",
+      },
       "internalConsoleOptions": "openOnSessionStart"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/src/server.js"
+      "program": "${workspaceFolder}/src/index.js"
     }
   ]
 }

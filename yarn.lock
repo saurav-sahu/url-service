@@ -501,7 +501,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.0.5, bluebird@^3.4.1, bluebird@^3.4.6, bluebird@^3.5.0, bluebird@^3.5.1:
+bluebird@^3.0.5, bluebird@^3.3.4, bluebird@^3.4.1, bluebird@^3.4.6, bluebird@^3.5.0, bluebird@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
@@ -648,6 +648,13 @@ catbox-memory@^2.0.4:
   dependencies:
     hoek "4.x.x"
 
+catbox-redis@^3.0.2:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/catbox-redis/-/catbox-redis-3.1.1.tgz#a6e73ad800bfab613c68808a35eb4da1886911be"
+  dependencies:
+    hoek "4.x.x"
+    ioredis "3.x.x"
+
 catbox@^7.1.5:
   version "7.1.5"
   resolved "https://registry.yarnpkg.com/catbox/-/catbox-7.1.5.tgz#c56f7e8e9555d27c0dc038a96ef73e57d186bb1f"
@@ -789,6 +796,10 @@ cls-bluebird@^2.1.0:
   dependencies:
     is-bluebird "^1.0.2"
     shimmer "^1.1.0"
+
+cluster-key-slot@^1.0.6:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/cluster-key-slot/-/cluster-key-slot-1.0.8.tgz#7654556085a65330932a2e8b5976f8e2d0b3e414"
 
 co@^4.6.0:
   version "4.6.0"
@@ -1055,6 +1066,10 @@ delayed-stream@~1.0.0:
 delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
+
+denque@^1.1.0:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/denque/-/denque-1.2.3.tgz#98c50c8dd8cdfae318cc5859cc8ee3da0f9b0cc2"
 
 depd@^1.1.0:
   version "1.1.2"
@@ -1580,6 +1595,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+flexbuffer@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/flexbuffer/-/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
+
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2067,6 +2086,34 @@ invariant@^2.2.2:
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
+
+ioredis@3.x.x:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-3.2.2.tgz#b7d5ff3afd77bb9718bb2821329b894b9a44c00b"
+  dependencies:
+    bluebird "^3.3.4"
+    cluster-key-slot "^1.0.6"
+    debug "^2.6.9"
+    denque "^1.1.0"
+    flexbuffer "0.0.6"
+    lodash.assign "^4.2.0"
+    lodash.bind "^4.2.1"
+    lodash.clone "^4.5.0"
+    lodash.clonedeep "^4.5.0"
+    lodash.defaults "^4.2.0"
+    lodash.difference "^4.5.0"
+    lodash.flatten "^4.4.0"
+    lodash.foreach "^4.5.0"
+    lodash.isempty "^4.4.0"
+    lodash.keys "^4.2.0"
+    lodash.noop "^3.0.1"
+    lodash.partial "^4.2.1"
+    lodash.pick "^4.4.0"
+    lodash.sample "^4.2.1"
+    lodash.shuffle "^4.2.0"
+    lodash.values "^4.3.0"
+    redis-commands "^1.2.0"
+    redis-parser "^2.4.0"
 
 iron@4.x.x, iron@^4.0.5:
   version "4.0.5"
@@ -2930,6 +2977,10 @@ lodash.isequal@^4.0.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
+lodash.keys@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-4.2.0.tgz#a08602ac12e4fb83f91fc1fb7a360a4d9ba35205"
+
 lodash.merge@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
@@ -2937,6 +2988,10 @@ lodash.merge@^4.6.0:
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
+
+lodash.values@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
 
 lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.0, lodash@^4.17.1, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.5"
@@ -3892,6 +3947,14 @@ rechoir@^0.6.2:
   resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
   dependencies:
     resolve "^1.1.6"
+
+redis-commands@^1.2.0:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.3.5.tgz#4495889414f1e886261180b1442e7295602d83a2"
+
+redis-parser@^2.4.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"
