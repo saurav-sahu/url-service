@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --forceExit --runInBand",
+    "test": "(echo 'flushall' | redis-cli) && NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --forceExit --runInBand && (echo 'flushall' | redis-cli)",
     "coverage": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --forceExit --runInBand --coverage"
   },
   "dependencies": {
