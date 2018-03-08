@@ -42,16 +42,18 @@ describe('get /urls', () => {
   });
 
   test('should return statusCode 404 when code does not exist in the database', (done) => {
-    supertest(server.listener)
-      .get('/urls?code=12345_')
-      .then((response) => {
-        expect(response.body.statusCode).toBe(404);
-        done();
-      });
+    server.start()
+      .then(() => supertest(server.listener)
+        .get('/urls?code=12345_')
+        .then((response) => {
+          expect(response.body.statusCode).toBe(404);
+          done();
+        }));
   });
 
   test('should return correct url entry when code is present in the database', (done) => {
-    models.urls.findOne()
+    server.start()
+      .then(() => models.urls.findOne())
       .then(urlRow => supertest(server.listener)
         .get(`/urls?code=${urlRow.shortUrl}`)
         .then((response) => {

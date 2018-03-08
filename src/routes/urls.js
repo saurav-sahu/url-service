@@ -1,6 +1,5 @@
 const joi = require('joi');
 
-const models = require('../models');
 const helpers = require('../helpers');
 const server = require('../server');
 const redisCacheOptions = require('../cache/redis-cache-options');
@@ -42,27 +41,12 @@ module.exports = [
       const { code } = request.query;
 
       redisCache.get(code, (error, longUrl) => {
-        if (error) return response(error);
-
         if (!longUrl) {
-          return models.urls.findOne({ where: { shortUrl: code } })
-            .then((urlRow) => {
-              if (!urlRow) {
-                return response({
-                  statusCode: 404,
-                  error: 'Url not found',
-                  message: 'No url found with the specified url.',
-                });
-              }
-
-              return response({
-                data: {
-                  longUrl: urlRow.longUrl,
-                  shortUrl: code,
-                },
-                statusCode: 200,
-              });
-            });
+          return response({
+            error: 'Url not found',
+            message: 'No url found with the specified code',
+            statusCode: 404,
+          });
         }
         return response({
           data: {
@@ -75,4 +59,3 @@ module.exports = [
     },
   },
 ];
-
