@@ -1,6 +1,4 @@
 const hasher = require('../src/lib/hasher');
-const server = require('../src/server');
-const redisOptions = require('../src/cache/redis-cache-options');
 
 const urlObjectsGenerator = (offset, count) => {
   const sampleUrlObjects = {};

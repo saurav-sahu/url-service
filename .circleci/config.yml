@@ -8,12 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
-      
-      - image: postgres:10.1
-          environment:
-            - POSTGRES_USER: database_admin
-            - POSTGRES_DB: url
-
+      - image: circleci/postgres:10.1
+        environment:
+          POSTGRES_USER: database_admin
+          POSTGRES_DB: url_test
       - image:  circleci/redis:4.0.8
        
       # Specify service dependencies here if necessary
@@ -40,7 +38,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
+      # check linting errors
+      - run: yarn eslint .
       # run tests!
       - run: yarn test
-
-
