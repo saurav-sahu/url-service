@@ -11,8 +11,8 @@ jobs:
       
       - image: circleci/postgres:10.1
           environment:
-        - POSTGRES_USER: database_admin
-        - POSTGRES_DB: url
+            - POSTGRES_USER: database_admin
+            - POSTGRES_DB: url
 
       - image:  circleci/redis:4.0.8
        
