@@ -35,5 +35,15 @@
     "pm2": "^2.10.1",
     "sequelize-cli": "^4.0.0",
     "supertest": "^3.0.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 80,
+        "lines": 90,
+        "statements": 90
+      }
+    }
   }
 }

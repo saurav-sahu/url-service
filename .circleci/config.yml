@@ -40,5 +40,6 @@ jobs:
         
       # check linting errors
       - run: yarn eslint .
-      # run tests!
-      - run: yarn test
+      # check coverage
+      - run: yarn coverage
+
