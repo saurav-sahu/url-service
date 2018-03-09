@@ -9,6 +9,13 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:7.10
       
+      - image: circleci/postgres:10.1
+          environment:
+        - POSTGRES_USER: database_admin
+        - POSTGRES_DB: url
+
+      - image:  circleci/redis:4.0.8
+       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
